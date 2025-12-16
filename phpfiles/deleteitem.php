@@ -9,7 +9,7 @@ if($row=pg_fetch_assoc($result)){
 $img_name=$row['image'];
 $img_path="../images/". $img_name;
 }
-if(file_exists($img_path)){unlink($img_path); }
+if(!empty($img_name) && file_exists($img_path)){unlink($img_path); }
 
 pg_query($conn, "DELETE FROM items WHERE id='$id_item' ");
 header("location: ../discover-items.php");
