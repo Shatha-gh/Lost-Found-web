@@ -88,7 +88,7 @@ if(!isset($_SESSION['email'])){
             
             <form action="phpfiles/additem.php" method="post" enctype="multipart/form-data" class="df f-c bc-light-gray n-shadow mt-n p-20 rad-n">  
                 <label for="item-name" class="c-purple txt-w mb-10">اسم العنصر المفقود:</label>
-                <input type="text" id="item-name" name="item-name" class="bc-white c-black mb-10 p-20 rad-6" placeholder="ادخل اسم العنصر المفقود" required>
+                <input type="text" id="item-name" name="item_name" class="bc-white c-black mb-10 p-20 rad-6" placeholder="ادخل اسم العنصر المفقود" required>
 
                 <label for="item-type" class="c-purple txt-w mb-10">نوع العنصر المفقود:</label>
                 <input type="text" id="item-type" name="item_type" class="bc-white c-black mb-10 p-20 rad-6" placeholder="ادخل نوع العنصر المفقود" required>
