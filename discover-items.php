@@ -75,9 +75,8 @@
 
 <?php
 $conn=pg_connect("host=localhost dbname=lost_found_db user=postgres password=14112006");
-$sel=pg_query($conn, "SELECT * FROM items ORDER BY date DESC");
-$locations=array();
-$types=array(); 
+$loc=pg_query($conn, "SELECT DISTINCT location FROM items ORDER BY location");
+$ty=pg_query($conn, "SELECT DISTINCT type FROM items ORDER BY type");
 
 ?>
 
@@ -89,27 +88,25 @@ $types=array();
     <div class="search-bar p-20 rad-6 shadow-dark-gray bc-light-gray df gap-20">
   
 
-        <form method="GET" class="df mb-20">
-        <select id="location" class="bc-white c-black p-10 rad-6 mb-20">
+             <form method="GET" class="df mb-20" id="filter">
+        <select id="location" name="location" class="bc-white c-black p-10 rad-6 mb-20" >
              <option disabled selected>تصفية حسب المكان</option>
-            <?php while(($row=pg_fetch_assoc($sel))):?>
-            <?php if(!in_array($row['location'],$locations)){
-            $locations[]=$row['location']; ?>
-            
-            <option value="<?php echo htmlspecialchars($row['location']); ?>"><?php echo htmlspecialchars($row['location']); ?></option>
-            <?php } ?>
+            <?php while(($row=pg_fetch_assoc($loc))):?>
+                    
+            <option class="bc-white c-black p-10 rad-6 mb-20 " name="location" value="<?php echo htmlspecialchars($row['location']); ?>">
+                <?php echo htmlspecialchars($row['location']); ?>
+            </option>
             <?php endwhile; ?>
-          
+        
         </select>
-        <select id="type" class="bc-white c-black p-10 rad-6 mb-20">
+        <select id="type" name="type" class="bc-white c-black p-10 rad-6 mb-20">
               <option disabled selected>تصفية حسب نوع العنصر</option>
-            <?php while($row=pg_fetch_assoc($sel)):?>
-            <?php if(!in_array($row['type'],$types)){
-               $types[]=$row['type'];?>
-    
-              <option value="<?php echo htmlspecialchars($row['type']); ?>"><?php echo htmlspecialchars($row['type']); ?></option>
-              <?php } ?>
-              <?php endwhile; ?>
+            <?php while($row=pg_fetch_assoc($ty)):?>
+                
+              <option class="bc-white c-black p-10 rad-6 mb-20" name="type" value="<?php echo htmlspecialchars($row['type']); ?>">
+                <?php echo htmlspecialchars($row['type']); ?>
+            </option>
+            <?php endwhile; ?>
              
         </select>
           <button type="submit" class="bc-purple c-white sid-icon p-10 rad-6 mb-20">تصفية</button>
@@ -143,7 +140,7 @@ $types=array();
             ?>  
              <div class="item-card bc-light-gray rad-6 shadow-dark-gray p-10 card mt-5 w-40per m-20">
                 <img class="w-280 h-200 br-6 mb-10 display-item-img" src="images/<?php echo htmlspecialchars($row['image']); ?>" alt="صورة العنصر المفقود">
-                <h3 class="c-g txt-c mb-10 "><?php echo htmlspecialchars($row['item_name']); ?></h3>
+                <h3 class="c-g txt-c mb-10 "><?php echo htmlspecialchars($row['name']); ?></h3>
                 <p class="c-black mb-10"><strong>الوصف:</strong> <?php echo htmlspecialchars($row['description']); ?></p>
                 <p class="c-black mb-10"><strong>مكان العثور:</strong> <?php echo htmlspecialchars($row['location']); ?></p>
                 <p class="c-black mb-10"><strong>تاريخ العثور:</strong><?php echo htmlspecialchars($row['date']); ?></p>
