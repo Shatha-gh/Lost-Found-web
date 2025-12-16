@@ -160,7 +160,7 @@ form{
     width: 100% !important;
     height: 200px !important;
     border-radius: 6px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .item-list .item-card{
     box-sizing: border-box;
@@ -271,11 +271,7 @@ form{
 .add{
     width : 80%;
 }
-   
 
-
-    
-
- 
 }
     
+
