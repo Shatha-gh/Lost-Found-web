@@ -11,23 +11,25 @@ $message=" شكرا لتسجيلك في موقعنا. رمز التحقق الخ
 $headers="From:shathaghanem2025@gmail.com";
 $usercode=mail($to,$subject,$message,$headers);
 if(!$usercode){
-    echo "<script>alert('حدث خطأ أثناء إرسال رمز التحقق إلى بريدك الإلكتروني. حاول مرة أخرى.'); window.location.href = '../login.html';</script>";
+    echo "<script>alert('حدث خطأ أثناء إرسال رمز التحقق إلى بريدك الإلكتروني. حاول مرة أخرى.'); window.location.href = '../login.php';</script>";
     exit;
 }
 else if($_POST['code'] != $code){
-    echo "<script>alert('رمز التحقق غير صحيح. حاول مرة أخرى.'); window.location.href = '../login.html';</script>";
+    echo "<script>alert('رمز التحقق غير صحيح. حاول مرة أخرى.'); window.location.href = '../login.php';</script>";
     exit;
 }
 else{
 if(pg_query($conn, "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')")){
      $_SESSION['email']=$email; 
     echo "success";
+        header("location:../the-main-page.php");
     exit;
 
 }
 
 else{
     echo" error";
+    exit;
 }
 }
 ?>
