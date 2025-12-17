@@ -1,6 +1,4 @@
-function showme(){
-    alert("ok");
-}
+
 function loginform(){
     email=document.getElementById("email").value;
     password=document.getElementById("password").value;
@@ -52,3 +50,4 @@ function logout(){
 document.getElementById("display_code_side").addEventListener("click",function(){
     document.getElementById("code").style.display="block";
 }); 
+
