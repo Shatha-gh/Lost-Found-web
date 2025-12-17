@@ -7,13 +7,19 @@ if(pg_query($conn, "SELECT name FROM users WHERE email='$email'")){
         session_start();
         $_SESSION['email']=$email;
         echo "success";
+        header("location: ../the-main-page.php");
+        exit;
     }
     else{
         echo "error";
-    }
+            echo "<script>alert('كلمة السر غير صحيح. حاول مرة أخرى.'); window.location.href = '../loginform.php';</script>";
+        exit;
+        }
 }
 else{
     echo "error";
+    echo "<script>alert('الايميل غير صحيح. حاول مرة أخرى.'); window.location.href = '../loginform.php';</script>";
+        exit;
 }
 
 
